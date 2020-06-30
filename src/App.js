@@ -37,7 +37,7 @@ function App() {
     <div className="App">
       <header className="App-header">
        <p>Response: {apiData}</p>
-       <p>Welcome to the</p>
+       <p>Welcome to the matching portal</p>
         <button onClick={handleClick}>Click Here to Generate Work!</button>
         <AmplifySignOut />
       </header>
