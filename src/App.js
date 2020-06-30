@@ -1,32 +1,47 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { withAuthenticator } from 'aws-amplify-react'
-import Amplify, { Auth } from 'aws-amplify';
-import aws_exports from './aws-exports';
-Amplify.configure(aws_exports);
+import React from "react";
+import "./App.css";
+import Amplify, { API } from "aws-amplify";
+import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Hello World.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+Amplify.configure({
+  //Auth is the same as before
+  Auth: {
+    region: "eu-west-1",
+    userPoolId: "eu-west-1_btBXyQgb0",
+    userPoolWebClientId: "2pktc8ufthjn8lmj7uoqtscbk3",
+  },
+  // Add in our new API, "name" can be whatever we want
+  API: {
+    endpoints: [
+      {
+        name: "matching",
+        endpoint:
+          "https://api.skuuudle.cloud",
+      },
+    ],
+  },
+});
+
+function App() {
+  const [apiData, setApiData] = React.useState("");
+
+  const handleClick = async () => {
+    const data = await API.get("demo", "/local/", {
+      headers: {
+        "x-api-key": "NxeVUoKfXO1yAygYgc2L6aDNHdOpPkfm55XihMvT",
+      },
+    });
+    setApiData(data.body);
+  };
+  return (
+    <div className="App">
+      <header className="App-header">
+       <p>Response: {apiData}</p>
+        <button onClick={handleClick}>Click Here to Generate Work!</button>
+        <AmplifySignOut />
+      </header>
+    </div>
+  );
 }
 
-export default withAuthenticator(App, true);
+export default withAuthenticator(App);
