@@ -26,7 +26,7 @@ function App() {
   const [apiData, setApiData] = React.useState("");
 
   const handleClick = async () => {
-    const data = await API.get("demo", "/local/removedmatches", {
+    const data = await API.get("matching", "/local/removedmatches", {
       headers: {
         "x-api-key": "NxeVUoKfXO1yAygYgc2L6aDNHdOpPkfm55XihMvT",
       },
@@ -37,6 +37,7 @@ function App() {
     <div className="App">
       <header className="App-header">
        <p>Response: {apiData}</p>
+       <p>Welcome to the</p>
         <button onClick={handleClick}>Click Here to Generate Work!</button>
         <AmplifySignOut />
       </header>
