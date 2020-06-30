@@ -26,7 +26,7 @@ function App() {
   const [apiData, setApiData] = React.useState("");
 
   const handleClick = async () => {
-    const data = await API.get("demo", "/local/", {
+    const data = await API.get("demo", "/local/removedmatches", {
       headers: {
         "x-api-key": "NxeVUoKfXO1yAygYgc2L6aDNHdOpPkfm55XihMvT",
       },
